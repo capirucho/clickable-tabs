@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<!-- Clickable tabs -->
+
+<html>
+    <head>
+        <title>Clickable Tabs</title>
+    </head>
+    <style>
+        #features {
+            width: 660px;
+            margin: 0 auto;
+        }
+
+        .tab-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .tab-container .tab {
+            width: 200px;
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid red;
+        }
+
+        .selected {
+            background-color: aquamarine;
+            border-bottom: none !important;
+            transition: background-color .3s ease-in;
+        }
+
+        #tab-content {
+            overflow: hidden;
+            max-width: 660px;
+        }
+
+        #a-content, #b-content, #c-content {
+            display: none;
+            top: 0 !important;     
+        }
+        
+        .contentVisible {
+            display: block !important;
+            opacity: .8 !important;
+            background-color: white !important;
+            top: 0px !important;
+        }
+  
+
+    </style>
+
+    <script>
+        
+        function makeSelected(clickedId) {
+            //check to see if tab is already selected, if it is, remove "selected" class
+            var alreadySelected = document.getElementsByClassName("selected");
+            alreadySelected[0].classList.toggle("selected");
+
+            //find tab that was clicked and add "selected class"
+            var tabClicked = document.getElementById(clickedId);    
+            //alert(tabClicked.id);
+            tabClicked.classList.toggle("selected");
+
+            //get the tab content
+            var tabContent = document.getElementById("tab-content");
+            var content = tabContent.getElementsByTagName("div");
+            for (var i = 0; i < content.length; i++) {
+                var contentName = content[i].getAttribute("data-content");
+
+                if ( contentName === tabClicked.id) {
+
+                    //hide content if alreaddy visible
+                    var contentAlreadyVisible = document.getElementsByClassName("contentVisible");
+                    contentAlreadyVisible[0].classList.toggle("contentVisible");
+
+                    var contentLabel = document.getElementsByClassName(contentName)[0];
+                    contentLabel.classList.toggle("contentVisible");
+                }
+            }
+        }
+    </script>
+    <body>
+        <div id="features">
+            <div class="tab-container">
+                <div id="lorem" class="tab selected" onclick="makeSelected(this.id)">Lorem</div>
+                <div id="vestibulum" class="tab" onclick="makeSelected(this.id)">Stream</div>
+                <div id="donec" class="tab" onclick="makeSelected(this.id)">Shop</div>
+            </div>
+            <div id="tab-content">
+                <div id="a-content" class="lorem contentVisible" data-content="lorem">
+                    <h1>Lorem Content</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in diam fringilla, hendrerit quam eget, tempus leo. 
+                        Duis vitae efficitur lacus, sed sollicitudin turpis. Pellentesque pretium congue finibus. Vivamus facilisis rhoncus pellentesque. 
+                        Proin eget aliquam orci. Nullam pretium porttitor turpis a feugiat. Quisque eget magna nisi. 
+                        In luctus augue sit amet diam ultricies, ac maximus lectus lacinia. In congue tincidunt nisi ac hendrerit. 
+                        Vestibulum euismod, nisi vel ullamcorper sagittis, purus libero tristique nisl, non viverra lectus quam vitae ipsum.
+                    </p>
+                </div>
+                <div id="b-content" class="vestibulum" data-content="vestibulum">
+                    <h1>Vestibulum Content</h1>
+                    <p>
+                        Vestibulum aliquet lectus nec tempor tincidunt. Nam cursus metus quis lorem rhoncus, sit amet accumsan odio venenatis. 
+                        Integer et arcu ante. Praesent maximus eros sit amet mi pulvinar, ac molestie justo fermentum. 
+                        Donec orci elit, dictum et magna sit amet, accumsan vulputate quam. Fusce eget venenatis risus. 
+                        Nunc vel nisi molestie, consequat risus non, convallis tellus. Curabitur suscipit volutpat elit ac iaculis. 
+                        Nullam sollicitudin arcu ligula, id porta dui lacinia in.  
+                    </p>
+                </div>
+                <div id="c-content" class="donec" data-content="donec">
+                    <h1>Donec Content</h1>
+                    <p>
+                        Donec eget arcu finibus, vulputate metus nec, tristique nisi. 
+                        Nunc finibus elit leo, eget mattis sem ullamcorper sit amet. Etiam iaculis aliquet euismod. Cras sed quam lectus. 
+                        Maecenas neque quam, scelerisque vel fermentum nec, euismod et magna. Mauris fermentum, sapien vitae consequat convallis, 
+                        sem augue mattis augue, vitae mattis eros ante sed orci. Donec auctor lacinia augue gravida vulputate.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+
+    </body>
+
+</html>
